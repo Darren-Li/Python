@@ -1,2 +1,2 @@
 # Python
-Python 学习历程
+Python 相关
