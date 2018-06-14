@@ -1,1 +1,1 @@
-web scraping with selenium/模拟浏览器爬虫
+web scraping with selenium in Python / 模拟浏览器爬虫
