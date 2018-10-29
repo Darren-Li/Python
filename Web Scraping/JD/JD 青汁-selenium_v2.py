@@ -1,13 +1,3 @@
-# @Time    : 07/23/2018 4:00 PM
-# @Author  : 李武卿, 主管数据分析师
-# @File    : JD 青汁 -selenium_v2.py
-# @Software: PyCharm Community Edition
-# @license : Copyright(C), 美库尔信息咨询（南京）有限公司
-# @Contact : wuli@merkleinc.com、lwq07010328@163.com
-# @Mobile  : (+86) 130-7253-6076
-# @WeChat  ：wx_Darren910220
-
-
 update_log = """
 2018/07/23 Wuqing Li
 2018/10/29 Wuqing Li, 添加注释
@@ -442,15 +432,17 @@ time.sleep(60)
 create_dir('data')
 
 # sellers and categories info
-wuli = ['大麦若叶 青汁', ]
+wuli = ['大麦若叶 青汁', '美素佳儿']
 
+# 测试
 # words = '大麦若叶 青汁'
-words = '美素佳儿'
+# words = '美素佳儿'
 
 for words in wuli:
     # details and comments, 修改max_comments_pages获取相应页数的评论，最大和默认评论页数为100（网页只能最多返回这么多）
-    items_info_comments(words, speed=1, comments=True, details=True, max_comments_pages=3)
-    # items_info_comments(words, speed=1, comments=True, details=True)  # 获取全部数据（详细产品信息，全部评论）
+
+    # items_info_comments(words, speed=1, comments=True, details=True, max_comments_pages=3)
+    items_info_comments(words, speed=1, comments=True, details=True)  # 获取全部数据（详细产品信息，全部评论）
 
     # details only
     # items_info_comments(words, speed=1, comments=False, details=True)
