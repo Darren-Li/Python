@@ -279,6 +279,7 @@ def get_all_comments(item_id, file, max_page=100):
         if lastPage > max_page:
             lastPage = max_page + 1
             print('多更多评论数据，但是根据设定之抓取前 {} 页'.format(max_page))
+            print('page {0:2} of {1:2}'.format(1, lastPage))
 
         for page in range(1, lastPage):
             time.sleep(random.randrange(3, 6))
