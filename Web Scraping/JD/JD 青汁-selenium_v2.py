@@ -182,7 +182,7 @@ def get_comments(item_id, page):
     # 排除“无法访问此网站”的错误
     if 'productCommentSummary' not in raw_json:
         print('该页面没有JSON格式数据，不进行JSON解析！')
-        comments_json = 'Non-JSON'
+        comments_json = {'JSON': None}
     else:
         try:
             comments_json = fix_JSON(raw_json.strip('fetchJSON_comment98vv12723()\n'))
@@ -282,7 +282,7 @@ def get_all_comments(item_id, file, max_page=100):
 
         for page in range(1, lastPage):
             time.sleep(random.randrange(3, 6))
-            # print('page {0:2} of {1:2}'.format(page, lastPage))
+            print('page {0:2} of {1:2}'.format(page, lastPage))
             i = 1
             while True:
                 comments = get_comments(item_id, page)
@@ -429,7 +429,7 @@ def items_info_comments(search_words, speed=1, comments=True, details=True, max_
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # load chrome.exe
-browser = webdriver.Chrome(r'C:\Darren\ziqing\Merkle\Python\Web Scraping with Python\chromedriver.exe')
+browser = webdriver.Chrome(r'C:\Darren\ziqing\Merkle\Python\Web Scraping with Python\chromedriver.exe')  # 修改路径
 browser.maximize_window()  # 窗口最大化
 
 # login JD
