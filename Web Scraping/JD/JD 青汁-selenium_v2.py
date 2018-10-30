@@ -1,6 +1,6 @@
 update_log = """
 2018/07/23 Wuqing Li
-2018/10/29 Wuqing Li, 添加注释
+2018/10/29 Wuqing Li, 添加注释，解决评论页面无法访问导致无JSON数据时fix_JSON函数迭代锁死问题
 
 """
 
@@ -267,11 +267,12 @@ def get_all_comments(item_id, file, max_page=100):
         lastPage = int(comments.get('maxPage'))
 
         if lastPage > max_page:
-            lastPage = max_page + 1
+            lastPage = max_page
             print('多更多评论数据，但是根据设定之抓取前 {} 页'.format(max_page))
-            print('page {0:2} of {1:2}'.format(1, lastPage))
 
-        for page in range(1, lastPage):
+        print('page {0:2} of {1:2}'.format(1, lastPage))
+
+        for page in range(1, lastPage+1):
             time.sleep(random.randrange(3, 6))
             print('page {0:2} of {1:2}'.format(page, lastPage))
             i = 1
@@ -350,10 +351,11 @@ def items_info_comments(search_words, speed=1, comments=True, details=True, max_
     time.sleep(3)
 
     while True:
-        time.sleep(5*speed)
+        time.sleep(3*speed)
         browser.execute_script("window.scrollTo(0, 4000);")  # 滑动窗口，保证页面加载完成
-        time.sleep(7*speed)
-        browser.execute_script("window.scrollTo(0, 8000);")
+        time.sleep(5*speed)
+        browser.execute_script("window.scrollTo(0, 6000);")
+        time.sleep(7 * speed)
         browser.implicitly_wait(30)
 
         main_page = browser.current_window_handle
@@ -419,38 +421,39 @@ def items_info_comments(search_words, speed=1, comments=True, details=True, max_
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-# load chrome.exe
-browser = webdriver.Chrome(r'C:\Darren\ziqing\Merkle\Python\Web Scraping with Python\chromedriver.exe')  # 修改路径
-browser.maximize_window()  # 窗口最大化
+if __name__ == "__main__":
+    # load chrome.exe
+    browser = webdriver.Chrome(r'C:\Darren\ziqing\Merkle\Python\Web Scraping with Python\chromedriver.exe')  # 修改路径
+    browser.maximize_window()  # 窗口最大化
 
-# login JD
-browser.get(r'https://passport.jd.com/new/login.aspx?')
-print('Please login through QR code')
-time.sleep(60)
+    # login JD
+    browser.get(r'https://passport.jd.com/new/login.aspx?')
+    print('Please login through QR code')
+    time.sleep(60)
 
-# 创建文件夹
-create_dir('data')
+    # 创建文件夹
+    create_dir('data')
 
-# sellers and categories info
-wuli = ['大麦若叶 青汁', '美素佳儿']
+    # sellers and categories info
+    # wuli = ['大麦若叶 青汁']
+    # wuli = ['美素佳儿']
 
-# 测试
-# words = '大麦若叶 青汁'
-# words = '美素佳儿'
+    # wuli = ['雅培', '惠氏', '美素佳儿']
+    wuli = ['爱他美', '诺优能', '贝因美', '美赞臣']
+    wuli = [i + ' 婴儿奶粉' for i in wuli]
 
-for words in wuli:
-    # details and comments, 修改max_comments_pages获取相应页数的评论，最大和默认评论页数为100（网页只能最多返回这么多）
+    for words in wuli:
+        print('正在抓取关键字 {} 相关的产品信息'.format(words))
+        # details and comments, 修改max_comments_pages获取相应页数的评论，最大和默认评论页数为100（网页只能最多返回这么多）
 
-    # items_info_comments(words, speed=1, comments=True, details=True, max_comments_pages=3)
-    items_info_comments(words, speed=1, comments=True, details=True)  # 获取全部数据（详细产品信息，全部评论）
+        items_info_comments(words, speed=1, comments=True, details=True, max_comments_pages=30)
+        # items_info_comments(words, speed=1, comments=True, details=True)  # 获取全部数据（详细产品信息，全部评论）
 
-    # details only
-    # items_info_comments(words, speed=1, comments=False, details=True)
+        # details only
+        # items_info_comments(words, speed=1, comments=False, details=True)
 
-    # # comments only
-    # items_info_comments(words, speed=1, comments=True, details=False, max_comments_pages=3)
+        # # comments only
+        # items_info_comments(words, speed=1, comments=True, details=False, max_comments_pages=3)
 
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-browser.quit()   # close browser and chromedriver.exe
-# browser.close()  # only close browser
+    browser.quit()   # close browser and chromedriver.exe
+    # browser.close()  # only close browser
