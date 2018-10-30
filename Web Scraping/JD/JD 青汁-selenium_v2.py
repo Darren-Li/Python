@@ -1,3 +1,9 @@
+# @Time    : 07/23/2018 4:00 PM
+# @File    : Prod_Sales_Comments_on_JD_by_selenium.py
+# @Software: PyCharm Community Edition
+# @WeChat  : wx_Darren910220
+
+
 update_log = """
 2018/07/23 Wuqing Li
 2018/10/29 Wuqing Li, 添加注释，解决评论页面无法访问导致无JSON数据时fix_JSON函数迭代锁死问题
@@ -248,9 +254,10 @@ def get_all_comments(item_id, file, max_page=100):
         comments = get_comments(item_id, 0)
         if comments:
             if comments.get('productCommentSummary') is None:
+                t_rand = random.randrange(30, 60) * i
                 print(time.strftime("%Y-%m-%d %X", time.localtime()),
-                      ': 你是小蜘蛛。。。(定住你 {} 秒)'.format(random.randrange(50, 60) * i))
-                time.sleep(random.randrange(50, 60) * i)
+                      ': 你是小蜘蛛。。。(定住你 {} 秒)'.format(t_rand))
+                time.sleep(t_rand)
                 i += 1
             else:
                 break
@@ -268,12 +275,12 @@ def get_all_comments(item_id, file, max_page=100):
 
         if lastPage > max_page:
             lastPage = max_page
-            print('多更多评论数据，但是根据设定之抓取前 {} 页'.format(max_page))
+            print('有更多评论数据，但是根据设定只抓取前 {} 页'.format(max_page))
 
         print('page {0:2} of {1:2}'.format(1, lastPage))
 
         for page in range(1, lastPage+1):
-            time.sleep(random.randrange(3, 6))
+            time.sleep(random.randrange(1, 5))
             print('page {0:2} of {1:2}'.format(page, lastPage))
             i = 1
             while True:
@@ -281,9 +288,10 @@ def get_all_comments(item_id, file, max_page=100):
                 if comments:
                     if comments.get('productCommentSummary') is None:
                         print('page {0:2} of {1:2}'.format(page, lastPage))
+                        t_rand = random.randrange(30, 60) * i
                         print(time.strftime("%Y-%m-%d %X", time.localtime()),
-                              ': 你是小蜘蛛。。。(定住你 {} 秒)'.format(random.randrange(50, 60) * i))
-                        time.sleep(random.randrange(50, 60) * i)
+                              ': 你是小蜘蛛。。。(定住你 {} 秒)'.format(t_rand))
+                        time.sleep(t_rand)
                         i += 1
                     else:
                         break
