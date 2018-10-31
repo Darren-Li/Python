@@ -47,8 +47,8 @@ def content_snippets(keyword, contents, text_len=50, max_snippet_num=5):
             l = max(l0 - text_len, 0, u)
             u = u0 + text_len
 
-            # 修正 片段上下限位置
-            p_o = list(re.finditer('。|？|！|……', contents[:l][::-1]))  # 表示一段话结束的标点符号：句号，感叹号，问号，省略号
+            # 修正片段上下限位置，获取完整句子。表示一段话结束的标点符号：句号，感叹号，问号，省略号
+            p_o = list(re.finditer('。|？|！|……', contents[:l][::-1]))
             if p_o:
                 l -= p_o[0].span()[1]-1
 
@@ -251,9 +251,11 @@ if __name__ == '__main__':
     time.sleep(30)
 
     for keyword in keywords:
-        print('\n正在抓取 “{}” 的相关文章'.format(keyword))
         # keyword_search = keyword + ' 婴儿奶粉'
         keyword_search = keyword + ''
+        print('\n正在抓取 “{}” ({}/{}) 的相关文章，搜索的关键词为：“{}”'
+              .format(keyword, keywords.index(keyword)+1, len(keywords), keyword_search))
+
         weibo_search(keyword, keyword_search, start_dt, end_dt)
         time.sleep(30)
 
