@@ -1,25 +1,26 @@
-1.	时间序列分析
+## 时间序列分析
 
 根据背景描述和已给的数据集，按照要求探索并建立时间序列模型，最终需提交分析及建模对应的Python代码及对应输出。
 
-题目：关键词 - ”Python”的Google指数预测模型
+## 题目：关键词 - ”Python”的Google指数预测模型
 
-背景：
+## 背景：
 Google 趋势，或叫Google指数，是以Google海量网民行为数据为基础的数据分享平台。其上，你可以研究关键词搜索趋势、洞察网民需求变化、监测媒体舆情趋势、定位数字消费者特征；还可以从行业的角度，分析市场特点。百度指数与其类似。
+
 本案例以“Python” 为关键词，获取历史数据，要求运用时间序列预测分析的方法，对关键词 - ”Python”的Google指数进行预测。
  
-数据：直接从Google trends (https://trends.google.com/trends/?geo=US) 下载的2015/01/01 至2019/01/25的来自全球的关于“Python”的搜索指数数据。
-•	文件名：Google Index-Python worldwide(2015.1-2018.8).csv
-•	格式：非标准CSV文件（注意数据从第三行开始）
+## 数据：
+1. 直接从Google trends (https://trends.google.com/trends/?geo=US) 下载的2015/01/01 至2019/01/25的来自全球的关于“Python”的搜索指数数据。
+2. 文件名：Google Index-Python worldwide(2015.1-2018.8).csv
+3. 格式：非标准CSV文件（注意数据从第三行开始）
 
-要求：
+## 要求：
 1.	将观测数据读入Python中，并绘制时序图
 2.	将2015至2017段数据作为训练数据，将其余数据作为测试数据，并在训练数据集上建立时间序列预测模型，方法不限，但建议使用Box-Jenkins建模流程，使用ARIMA模型，并在测试数据集上计算拟合优度指标（不限）评价预测效果
 3.	预测2018.9至2019.8窗口内的“Python”的Google指数。并输出模型预测结果图，及预测数据（以csv的形式）
 4.	请简明注释重要过程及结论
 
-输出：
+## 输出：
 1.	以Jupyter Notebook形式提交代码及中间输出、结果
 2.	将最终预测以CSV文件形式输出
-预测数据输出要求：
-•	文件名：Google Index-worldwide(forecasting) – 学员姓名.csv
+3. 预测数据输出要求：**文件名：Google Index-worldwide(forecasting) – 学员姓名.csv**
